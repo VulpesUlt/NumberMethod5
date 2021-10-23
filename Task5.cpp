@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-#include "Nmeth.h"
 
 using namespace std;
 
@@ -94,7 +93,7 @@ namespace T5
 
     double eqfuncV(double x, int var)
     {
-        double y{ 0 }, temp;
+        double y{ 0 };
         switch (var)
         {
         case 9: y = -1 * pow(x, 2) + 2 * x + 1;
@@ -148,10 +147,10 @@ namespace T5
         cin >> acc;
 
         cout << "===== Метод Ньютона =====" << endl;
-        cout << "x= " << setprecision(6) << NwtMethod(var, b1, b2, acc) << endl;
+        cout << "x= " << setprecision(6) << T5::NwtMethod(var, b1, b2, acc) << endl;
 
         cout << "===== Метод простой итерации =====" << endl;
-        cout << "x= " << setprecision(6) << smplIter(var, b1, b2) << endl;
+        cout << "x= " << setprecision(6) << T5::smplIter(var, b1, b2) << endl;
     }
 
 }
