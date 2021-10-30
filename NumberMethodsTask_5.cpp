@@ -6,22 +6,30 @@
 #include <iomanip>
 
 const int NTASK = 6;
+const bool MANUAL = true;
 
 using namespace std;
 
 int main()
 {
+    string cont;
     int nTask{ 0 };
     setlocale(LC_ALL, "Russian");
-    //cout << "Введите номер задания: ";
-    //cin >> nTask;
 
-    switch(NTASK)
+    do
     {
-    case 5: T5::initT5();
-        break;
-    case 6: T6::initT6();
-    }
+        //cout << "Введите номер задания: ";
+        //cin >> nTask;
+        switch (NTASK)
+        {
+        case 5: T5::initT5();
+            break;
+        case 6: T6::initT6();
+        }
+        //cout << "Завершить работу? (y/n)";
+        //cin >> cont;
+        //system("cls");
+    } while (cont != "n" && !MANUAL);
 
     system("pause");
 }
