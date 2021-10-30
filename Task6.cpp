@@ -33,6 +33,7 @@ namespace T6
 		case 0: 
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 
 	double func2 (double x1, double x2, int var)
@@ -48,6 +49,7 @@ namespace T6
 		case 0: 
 			return (0.2 * x1 * x1 + x2 - 0.1 * x1 * x2 - 0.7);
 		}
+		return 1;
 	}
 
 	double func1d1 (double x1, double x2, int var)
@@ -63,6 +65,7 @@ namespace T6
 		case 0:
 			return (0.2 * x1 + 1);
 		}
+		return 1;
 	}
 
 	double func1d2 (double x1, double x2, int var)
@@ -78,6 +81,7 @@ namespace T6
 		case 0:
 			return (0.4 * x2);
 		}
+		return 1;
 	}
 
 	double func2d1 (double x1, double x2, int var)
@@ -93,6 +97,7 @@ namespace T6
 		case 0:
 			return (0.4 * x1 - 0.1 * x2);
 		}
+		return 1;
 	}
 
 	double func2d2 (double x1, double x2, int var)
@@ -108,6 +113,7 @@ namespace T6
 		case 0:
 			return (1 - 0.1 * x2);
 		}
+		return 1;
 	}
 
 	void NewtMethod (double x1, double x2, double precision, int var)
@@ -165,6 +171,7 @@ namespace T6
 		case 0:
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 	
 	double eqfunc2(double x1, double x2, int var)
@@ -180,6 +187,7 @@ namespace T6
 		case 0:
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 
 	double eqfunc1d1(double x1, double x2, int var)
@@ -195,6 +203,7 @@ namespace T6
 		case 0:
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 
 	double eqfunc1d2(double x1, double x2, int var)
@@ -210,6 +219,7 @@ namespace T6
 		case 0:
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 
 	double eqfunc2d1(double x1, double x2, int var)
@@ -225,6 +235,7 @@ namespace T6
 		case 0:
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 
 	double eqfunc2d2(double x1, double x2, int var)
@@ -240,6 +251,7 @@ namespace T6
 		case 0:
 			return (0.1 * x1 * x1 + x1 + 0.2 * x2 - 0.3);
 		}
+		return 1;
 	}
 
 	void iterMethod (double x1, double x2, double precision, int var)

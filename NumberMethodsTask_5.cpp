@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 
-const int NTASK = 6;
+const int NTASK = 7;
 const bool MANUAL = true;
 
 using namespace std;
@@ -22,9 +22,14 @@ int main()
         //cin >> nTask;
         switch (NTASK)
         {
+        case 1: init14();
+            break;
         case 5: T5::initT5();
             break;
         case 6: T6::initT6();
+            break;
+        case 7: T7::initT7();
+            break;
         }
         //cout << "Завершить работу? (y/n)";
         //cin >> cont;
