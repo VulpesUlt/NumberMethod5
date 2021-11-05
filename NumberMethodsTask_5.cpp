@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 
-const int NTASK = 7;
+const int NTASK = 8;
 const bool MANUAL = true;
 
 using namespace std;
@@ -29,6 +29,8 @@ int main()
         case 6: T6::initT6();
             break;
         case 7: T7::initT7();
+            break;
+        case 8: T8::initT8();
             break;
         }
         //cout << "Завершить работу? (y/n)";

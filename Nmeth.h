@@ -10,6 +10,7 @@ void printArray(double** arrayPtr, int numberOflines, int numberOfColumns);
 void __fastcall gaussMethod(double** arrayPtr, int numberOflines, int numberOfColumns);
 
 void __fastcall threeDiagMethod(double* arrayPtr[], int numberOflines, int numberOfColumns);
+void __fastcall threeDiagMethod(double* arrayPtr[], double* ansPtr, const int numberOflines, const int numberOfColumns);
 bool __fastcall threeDiagCheck(double* arrayPtr[], int numberOflines);
 
 void __fastcall SeidelMethod(double** arrPtr, int numberOfLines, int numberOfCulumns);
@@ -41,4 +42,10 @@ namespace T6
 namespace T7
 {
 	void initT7();
+}
+
+
+namespace T8
+{
+	void initT8();
 }
