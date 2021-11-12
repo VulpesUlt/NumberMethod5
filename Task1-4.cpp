@@ -168,6 +168,42 @@ void __fastcall threeDiagMethod(double* arrayPtr[], const int numberOflines, con
 	}
 }
 
+void __fastcall threeDiagMethod(double* arrayPtr[], double* ansPtr, const int numberOflines, const int numberOfColumns)
+{
+	if (!threeDiagCheck(arrayPtr, numberOflines)) // Проверка матрицы
+		cout << "Матрица неверна." << endl;
+	else
+	{
+		double* coefP = new double[numberOflines] { 0 };
+		double* coefQ = new double[numberOflines] { 0 };
+
+		// Прямой ход
+		coefP[0] = (-1 * arrayPtr[0][1]) / arrayPtr[0][0];
+		coefQ[0] = arrayPtr[0][numberOfColumns - 1] / arrayPtr[0][0];
+		for (int i = 1; i < numberOflines - 1; i++)
+		{
+			coefP[i] = (-1 * arrayPtr[i][i + 1]) / (arrayPtr[i][i] + arrayPtr[i][i - 1] * coefP[i - 1]);
+			coefQ[i] = (arrayPtr[i][numberOfColumns - 1] - arrayPtr[i][i - 1] * coefQ[i - 1]) / (arrayPtr[i][i] + arrayPtr[i][i - 1] * coefP[i - 1]);
+		}
+		coefP[numberOflines - 1] = 0;
+		coefQ[numberOflines - 1] = (arrayPtr[numberOflines - 1][numberOfColumns - 1] - arrayPtr[numberOflines - 1][numberOflines - 2] * coefQ[numberOflines - 2]) / (arrayPtr[numberOflines - 1][numberOflines - 1] + arrayPtr[numberOflines - 1][numberOflines - 2] * coefP[numberOflines - 2]);
+
+		// Обратный ход
+		double* answer = new double[numberOflines];
+		answer[numberOflines - 1] = coefQ[numberOflines - 1];
+		for (int i = numberOflines - 2; i > -1; i--)
+		{
+			answer[i] = coefP[i] * answer[i + 1] + coefQ[i];
+		}
+		for (int i = 0; i < numberOflines; i++)
+			ansPtr[i] = answer[i];
+		cout << endl;
+		delete[] coefP;
+		delete[] coefQ;
+		delete[] answer;
+	}
+}
+
 bool __fastcall threeDiagCheck(double* arrayPtr[], int numberOflines)
 {
 
