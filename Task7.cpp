@@ -53,12 +53,16 @@ namespace T7
 			point[1][0] = 0;
 			point[2][0] = 0.2;
 			point[3][0] = 0.5;
+			for (int i = 0; i < 4; i++)
+				point[i][1] = func(point[i][0], var);
 			break;
 		case 18:
 			point[0][0] = 0;
 			point[1][0] = 1.7;
 			point[2][0] = 4.1;
 			point[3][0] = 5.1;
+			for (int i = 0; i < 4; i++)
+				point[i][1] = func(point[i][0], var);
 			break;
 		}
 	}
@@ -140,7 +144,71 @@ namespace T7
 	
 	void Newton (double** point, double pt, int nPt, int var)
 	{
-		cout << "Я выживу..." << endl;
+		double* coef = new double[nPt];
+		double val{ 0 }, temp{0};
+		int iter{ 0 };
+
+		for (int i = 0; i < nPt; i++) // Запись f(x) в coef
+			coef[i] = point[i][1];
+		
+		for (int iter = 0; iter < nPt; iter++)
+		{
+			for (int i = nPt - 1; i > iter; i--) // Нахождение разностей f(x0,x1), f(x0,x1,x2), .. , f(x0,..,xn)
+			{
+				coef[i] = (coef[i - 1] - coef[i]) / (point[i - iter - 1][0] - point[i][0]);
+				cout << coef[i] << "  ";
+			}
+		}
+		cout << endl;
+
+		for (int iter = 0; iter < nPt; iter++)
+		{
+			temp = 1; // Нахождение значения функции в точке 
+			for (int j = 0; j < iter; j++)
+			{
+				temp *= pt - point[j][0];
+			}
+			val += coef[iter] * temp;
+			cout << " iter " << iter;
+		}
+		cout << endl;
+
+		cout << endl; // Вывод получненного многочлена Ньютона
+		for (int i = 0; i < nPt; i++) 
+		{
+			if (coef[i] >= 0 && i != 0)
+			{
+				cout << " + ";
+				cout << fabs(coef[i]);
+			}
+			else if (coef[i] < 0 && i != 0)
+			{
+				cout << " - ";
+				cout << fabs(coef[i]);
+			}
+			else
+				cout << coef[i];
+
+			for (int j = 0; j < i; j++)
+			{
+				if (point[j][0] > 0)
+					cout << "(x - " << point[j][0] << ")";
+				else
+					cout << "(x + " << fabs(point[j][0]) << ")";
+			}
+
+		}
+		cout << endl;
+		
+		cout << "Ln( " << pt << " )= " << val << endl;
+		
+		if (var != 0)
+		{
+			cout << "e = " << fabs(func(pt, var) - val) << endl;
+			cout << "Погрешность: " << (fabs(func(pt, var) - val) / fabs(func(pt, var))) << endl;
+		}
+
+		delete[] coef;
 	}
 	
 	void initT7 ()
@@ -157,10 +225,13 @@ namespace T7
 			double** point = new double* [nPt];
 			for (int i = 0; i < nPt; i++)
 				point[i] = new double[2];
+			
 			initvarLg(point, var);
 			Lagrange(point, pt, nPt, var);
+			
 			initvarNw(point, var);
 			Newton(point, pt, nPt, var);
+
 			delete[] point;
 		}
 		else if (var == 0)
