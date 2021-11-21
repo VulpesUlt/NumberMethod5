@@ -8,7 +8,7 @@ const bool MANUAL = true;
 using namespace std;
 
 namespace T7
-{
+{	
 	double func(double x, int var)
 	{
 		switch (var)
@@ -137,8 +137,12 @@ namespace T7
 		{
 			cout << "e = " << fabs(func(pt, var) - val) << endl;
 			cout << "Погрешность: " << (fabs(func(pt, var) - val) / fabs(func(pt, var))) << endl;
+		
+			double temp{ 0 };
 		}
 		
+
+
 		delete[] coef;
 	}
 	
@@ -156,7 +160,7 @@ namespace T7
 			for (int i = nPt - 1; i > iter; i--) // Нахождение разностей f(x0,x1), f(x0,x1,x2), .. , f(x0,..,xn)
 			{
 				coef[i] = (coef[i - 1] - coef[i]) / (point[i - iter - 1][0] - point[i][0]);
-				cout << coef[i] << "  ";
+				//cout << coef[i] << "  ";
 			}
 		}
 		cout << endl;
@@ -169,7 +173,7 @@ namespace T7
 				temp *= pt - point[j][0];
 			}
 			val += coef[iter] * temp;
-			cout << " iter " << iter;
+			//cout << " iter " << iter;
 		}
 		cout << endl;
 
