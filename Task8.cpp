@@ -11,6 +11,8 @@ const int B = 4;
 const int C = 5;
 const int D = 6;
 
+#define puk cout << "ѕук пук пук";
+
 using namespace std;
 
 namespace T8
@@ -134,6 +136,8 @@ namespace T8
 		
 		cbSpline(arrPtr, nPt);
 		
+		puk
+
 		for (int i = 0; i < 6; i++)
 			delete[] arrPtr[i];
 		delete[] arrPtr;

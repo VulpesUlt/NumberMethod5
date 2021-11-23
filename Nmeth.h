@@ -49,3 +49,13 @@ namespace T8
 {
 	void initT8();
 }
+
+namespace T9
+{
+	void initT9();
+}
+
+namespace T10
+{
+	void initT10();
+}

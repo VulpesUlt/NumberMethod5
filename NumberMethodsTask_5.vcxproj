@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="NumberMethodsTask_5.cpp" />
+    <ClCompile Include="Task10.cpp" />
     <ClCompile Include="Task8.cpp" />
     <ClCompile Include="Task7.cpp" />
     <ClCompile Include="Task1-4.cpp" />
     <ClCompile Include="Task6.cpp" />
     <ClCompile Include="Task5.cpp" />
+    <ClCompile Include="Task9.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Nmeth.h" />
