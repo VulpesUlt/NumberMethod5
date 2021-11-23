@@ -5,7 +5,9 @@
 #include <iostream>
 #include <iomanip>
 
-const int NTASK = 7;
+
+const int NTASK = 9;
+
 const bool MANUAL = true;
 
 using namespace std;
