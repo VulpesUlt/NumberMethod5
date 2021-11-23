@@ -204,7 +204,7 @@ namespace T7
 		}
 		cout << endl;
 		
-		cout << "Ln( " << pt << " )= " << val << endl;
+		cout << "Nw( " << pt << " )= " << val << endl;
 		
 		if (var != 0)
 		{

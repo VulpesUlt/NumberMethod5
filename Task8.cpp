@@ -138,7 +138,7 @@ namespace T8
 		
 		puk
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 7; i++)
 			delete[] arrPtr[i];
 		delete[] arrPtr;
 	}

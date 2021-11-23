@@ -6,7 +6,7 @@
 #include <iomanip>
 
 
-const int NTASK = 9;
+const int NTASK = 10;
 
 const bool MANUAL = true;
 

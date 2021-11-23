@@ -10,72 +10,44 @@ const int Y = 1;
 
 namespace T9
 {
-	void __fastcall SeidelMethod(double** arrPtr, int numberOfLines, int numberOfColumns)
+	void __fastcall gaussMethod(double** arrayPtr, int numberOflines, int numberOfColumns)
 	{
-		int iter = 0;
-		const double precision{ 0.000000001 };
-		double temp{ 0 }, alpha{ 0 }, actPrecision{ 0 };
 
-		do
+		// Прямой ход / Приведение матрицы к верхнетреугольному виду
+
+		for (int iter = 0; iter < numberOflines - 1; iter++)
+			for (int i = iter + 1; i < numberOflines; i++)
+				for (int j = numberOfColumns - 1; j > -1; j--)
+				{
+					arrayPtr[i][j] -= arrayPtr[iter][j] * arrayPtr[i][iter] / arrayPtr[iter][iter];
+				}
+
+		// Обратный ход. Нахождение корней
+
+		double* answer = new double[numberOflines];
+		for (int i = 0; i < numberOflines; i++)
 		{
-			if (iter == 0) // Нулевая итерация
-			{
-				for (int i = 0; i < numberOfLines; i++)
-				{
-					temp = 0;
-					for (int j = 0; j < numberOfColumns; j++)
-						if (i != j)
-						{
-							if (j != numberOfColumns - 1)
-							{
-								arrPtr[i][j] /= -arrPtr[i][i];
-								temp += arrPtr[i][j];
-							}
-							else
-								arrPtr[i][j] /= arrPtr[i][i];
-						}
-					arrPtr[i][i] = arrPtr[i][numberOfColumns - 1];
-					alpha = (alpha > abs(temp)) ? alpha : abs(temp);
-				}
-				if (alpha > 1)
-				{
-					cout << "Не выполнено учловие сходимости." << endl;
-					break;
-				}
-				actPrecision = alpha;
-				alpha /= 1 - alpha;
-			}
-			else
-			{
-				actPrecision = 0;
-				for (int i = 0; i < numberOfLines; i++)
-				{
-					temp = 0;
-					for (int j = 0; j < numberOfLines; j++)
-						if (i != j)
-							temp += arrPtr[i][j] * arrPtr[j][j];
-					temp += arrPtr[i][numberOfColumns - 1];
-					actPrecision = (actPrecision > alpha * (abs(temp - arrPtr[i][i]))) ? actPrecision : abs(temp - arrPtr[i][i]);
-					arrPtr[i][i] = temp;
-				}
-			}
-			iter++;
-		} while (actPrecision > precision && iter < 40);
-	}
-	
-	void krammer(double** arr)
-	{
-		int del = arr[0][0] * arr[1][1] - arr[0][1] * arr[1][0];
-		int delA = arr[0][2] * arr[1][1] - arr[1][2] * arr[0][1];
-		int delB = arr[0][0] * arr[1][2] - arr[1][0] * arr[0][2];
+			answer[i] = 0;
+		}
 
-		arr[0][0] = delA / del;
-		arr[1][1] = delB / del;
+		for (int i = numberOflines - 1; i > -1; i--)
+		{
+			for (int j = numberOfColumns - 2; j > 0; j--)
+			{
+				if (i != j)
+					answer[i] = answer[i] - answer[j] * arrayPtr[i][j];
+			}
+			answer[i] = (arrayPtr[i][numberOfColumns - 1] + answer[i]) / arrayPtr[i][i];
+		}
+
+		for (int i = 0; i < numberOflines; i++)
+			arrayPtr[i][i] = answer[i];
+
+		delete[] answer; // Удаление созданных массивов
 	}
 
 	void linearFunc(double** arrPtr, int nPt)
 	{
-		
 		double** arr = new double* [2];
 		arr[0] = new double[3];
 		arr[1] = new double[3];
@@ -83,26 +55,32 @@ namespace T9
 		for (int i = 0; i < 2; i++)
 			for (int j = 0; j < 3; j++)
 				arr[i][j] = 0;
-		
-		for(int i = 0; i < nPt; i ++)
+
+		for (int i = 0; i < nPt; i++)
 		{
 			arr[0][0] += arrPtr[X][i] * arrPtr[X][i];
 			arr[0][1] += arrPtr[X][i];
 			arr[0][2] += arrPtr[X][i] * arrPtr[Y][i];
 
-			arr[1][2] += arrPtr[X][i];
+			arr[1][2] += arrPtr[Y][i];
 		}
 		arr[1][0] = arr[0][1];
 		arr[1][1] = nPt;
 
-		krammer(arr);
-	
-		cout << endl << "Приближающий многочлен 1-ой степени:" << endl;
+		gaussMethod(arr, 2, 3);
+
+		cout << endl << "Приближающий многочлен 1-ой степени: ";
 		if (arr[1][1] >= +0)
 			cout << arr[0][0] << "*X + " << arr[1][1] << endl;
 		if (arr[1][1] < 0)
 			cout << arr[0][0] << "*X - " << fabs(arr[1][1]) << endl;
-	
+
+		double errorSum{ 0 };
+		for (int i = 0; i < nPt; i++)
+			errorSum += pow((arr[0][0] * arrPtr[X][i] + arr[1][1] - arrPtr[Y][i]), 2);
+		
+		cout << "Сумма квадратов ошибок: " << errorSum << endl;
+
 		for (int i = 0; i < 2; i++)
 			delete[] arr[i];
 		delete[] arr;
@@ -124,7 +102,7 @@ namespace T9
 			arr[0][1] += pow(arrPtr[X][i], 3);
 			arr[0][2] += pow(arrPtr[X][i], 2);
 			arr[0][3] += pow(arrPtr[X][i], 2) * arrPtr[Y][i];
-		
+			
 			arr[1][2] += arrPtr[X][i];
 			arr[1][3] += arrPtr[X][i] * arrPtr[Y][i];
 
@@ -137,9 +115,9 @@ namespace T9
 		arr[2][1] = arr[1][2];
 		arr[2][2] = nPt;
 		
-		SeidelMethod(arr, 3, 4);
+		gaussMethod(arr, 3, 4);
 		
-		cout << endl << "Приближающий многочлен 2-ой степени:" << endl;
+		cout << endl << "Приближающий многочлен 2-ой степени: ";
 
 		cout << arr[0][0] << "*X^2";
 		if (arr[1][1] >= +0)
@@ -151,6 +129,12 @@ namespace T9
 		else
 			cout << " - " << fabs(arr[2][2]);
 		cout << endl;
+
+		double errorSum{ 0 };
+		for (int i = 0; i < nPt; i++)
+			errorSum += pow((arr[0][0] * pow(arrPtr[X][i], 2) + arr[1][1] * arrPtr[X][i] + arr[2][2] - arrPtr[Y][i]), 2);
+
+		cout << "Сумма квадратов ошибок: " << errorSum << endl;
 		
 		for (int i = 0; i < 3; i++)
 			delete[] arr[i];
@@ -163,8 +147,8 @@ namespace T9
 		cout << "Введите количество точек: ";
 		cin >> nPt;
 
-		double** arrPtr = new double* [7];
-		for (int i = 0; i < 7; i++)
+		double** arrPtr = new double* [2];
+		for (int i = 0; i < 2; i++)
 			arrPtr[i] = new double[nPt];
 
 		cout << "Введите точки и значения функции в них (х): (у):";
@@ -179,7 +163,7 @@ namespace T9
 
 		quadraticFunc(arrPtr, nPt);
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 2; i++)
 			delete[] arrPtr[i];
 		delete[] arrPtr;
 	}

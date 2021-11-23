@@ -11,44 +11,37 @@ using namespace std;
 
 namespace T10
 {
-	double firstDiff(double** arrPtr, int nPt, double Pt)
+	void  firstDiff(double** arrPtr, int nPt, double Pt)
 	{
 		int counter{ 0 };
-
-		while (arrPtr[Y][counter] > Pt)
+		double left{ 0 }, right{ 0 }, mid{ 0 };
+		
+		while (arrPtr[X][counter] < Pt)
 			counter++;
+		counter++;
 
-		if (counter < nPt - 1)
-		{
-			return (arrPtr[Y][counter + 1] - arrPtr[Y][counter]) / (arrPtr[X][counter + 1] - arrPtr[X][counter]) +
-				   ((arrPtr[Y][counter + 2] - arrPtr[Y][counter + 1]) / (arrPtr[X][counter + 2] - arrPtr[X][counter + 1]) - 
-				   (arrPtr[Y][counter + 1] - arrPtr[Y][counter]) / (arrPtr[X][counter + 1] - arrPtr[X][counter])) /
-				   (arrPtr[X][counter + 2] - arrPtr[X][counter]) * 
-					(2 * Pt - arrPtr[X][counter] - arrPtr[X][counter + 1]);
-		}
-		else
-		{
-			return -1;
-		}
+		left = (arrPtr[Y][counter] - arrPtr[Y][counter - 1]) / (arrPtr[X][counter] - arrPtr[X][counter - 1]);
+		right = (arrPtr[Y][counter + 1] - arrPtr[Y][counter]) / (arrPtr[X][counter + 1] - arrPtr[X][counter]);
+		mid = (left + right) / 2;
+
+		cout << endl << "Первая производная заданной функции в точке " << Pt << ": " << endl;
+		cout << "Левая: " << left << " | Правая: " << right << " | Центральная: " << mid << endl;
+
 	}
 	
-	double secondDiff(double** arrPtr, int nPt, double Pt)
+	void secondDiff(double** arrPtr, int nPt, double Pt)
 	{
 		int counter{ 0 };
+		double diff{ 0 };
 
-		while (arrPtr[Y][counter] > Pt)
+		while (arrPtr[X][counter] < Pt)
 			counter++;
+		counter++;
+	
+		diff = arrPtr[X][counter + 1] - arrPtr[X][counter];
+		diff = (arrPtr[Y][counter + 1] - 2 * arrPtr[Y][counter] + arrPtr[Y][counter - 1]) / pow(diff, 2);
 
-		if (counter < nPt - 1)
-		{
-			return 2 * ((arrPtr[Y][counter + 2] - arrPtr[Y][counter + 1]) / (arrPtr[X][counter + 2] - arrPtr[X][counter + 1]) -
-				(arrPtr[Y][counter + 1] - arrPtr[Y][counter]) / (arrPtr[X][counter + 1] - arrPtr[X][counter])) /
-				(arrPtr[X][counter + 2] - arrPtr[X][counter]);
-		}
-		else
-		{
-			return -1;
-		}
+		cout << endl << "Вторая производная заданной функции в точке " << Pt << ": " << diff << endl;
 	}
 	
 	void initT10()
@@ -57,8 +50,8 @@ namespace T10
 		cout << "Введите количество точек: ";
 		cin >> nPt;
 
-		double** arrPtr = new double* [7];
-		for (int i = 0; i < 7; i++)
+		double** arrPtr = new double* [2];
+		for (int i = 0; i < 2; i++)
 			arrPtr[i] = new double[nPt];
 
 		cout << "Введите точки и значения функции в них (х): (у):";
@@ -73,11 +66,11 @@ namespace T10
 		cout << "Введите точку, в которой необхожимо найти значение производной: ";
 		cin >> Pt;
 
-		cout << firstDiff(arrPtr, nPt, Pt) << endl;
+		firstDiff(arrPtr, nPt, Pt);
 
-		cout << secondDiff(arrPtr, nPt, Pt) << endl;
+		secondDiff(arrPtr, nPt, Pt);
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 2; i++)
 			delete[] arrPtr[i];
 		delete[] arrPtr;
 	}
