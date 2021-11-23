@@ -55,3 +55,10 @@ namespace T9
 {
 	void initT9();
 }
+
+// Task 10 ======================================================
+namespace T10
+{
+	void initT10();
+}
+

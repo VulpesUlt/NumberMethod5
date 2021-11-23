@@ -34,6 +34,8 @@ int main()
             break;
         case 9: T9::initT9();
             break;
+        case 10: T10::initT10();
+            break;
         }
         //cout << "Завершить работу? (y/n)";
         //cin >> cont;

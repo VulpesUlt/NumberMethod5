@@ -63,6 +63,16 @@ namespace T9
 		} while (actPrecision > precision && iter < 40);
 	}
 	
+	void krammer(double** arr)
+	{
+		int del = arr[0][0] * arr[1][1] - arr[0][1] * arr[1][0];
+		int delA = arr[0][2] * arr[1][1] - arr[1][2] * arr[0][1];
+		int delB = arr[0][0] * arr[1][2] - arr[1][0] * arr[0][2];
+
+		arr[0][0] = delA / del;
+		arr[1][1] = delB / del;
+	}
+
 	void linearFunc(double** arrPtr, int nPt)
 	{
 		
@@ -85,7 +95,7 @@ namespace T9
 		arr[1][0] = arr[0][1];
 		arr[1][1] = nPt;
 
-		SeidelMethod( arr, 2, 3);
+		krammer(arr);
 	
 		cout << endl << "Приближающий многочлен 1-ой степени:" << endl;
 		if (arr[1][1] >= +0)
@@ -105,15 +115,15 @@ namespace T9
 		{
 			arr[i] = new double[4];
 			for (int j = 0; j < 4; j++)
-				arr[i][j] = 0;
+				arr[i][j] = 0.0;
 		}
 
 		for (int i = 0; i < nPt; i++)
 		{
-			arr[0][0] += pow(arrPtr[X][i], 4);
+			arr[0][0] += pow(arrPtr[X][i], 4);			
 			arr[0][1] += pow(arrPtr[X][i], 3);
 			arr[0][2] += pow(arrPtr[X][i], 2);
-			arr[0][3] += pow(arrPtr[X][i], 3) * arrPtr[Y][i];
+			arr[0][3] += pow(arrPtr[X][i], 2) * arrPtr[Y][i];
 		
 			arr[1][2] += arrPtr[X][i];
 			arr[1][3] += arrPtr[X][i] * arrPtr[Y][i];
