@@ -8,21 +8,21 @@
 
 const int NTASK = 10;
 
-const bool MANUAL = true;
+const bool MANUAL = false;
 
 using namespace std;
 
 int main()
 {
-    string cont;
+    char cont;
     int nTask{ 0 };
     setlocale(LC_ALL, "Russian");
 
     do
     {
-        //cout << "Введите номер задания: ";
-        //cin >> nTask;
-        switch (NTASK)
+        cout << "Введите номер задания: ";
+        cin >> nTask;
+        switch (nTask)
         {
         case 1: init14();
             break;
@@ -38,13 +38,15 @@ int main()
             break;
         case 10: T10::initT10();
             break;
+        default:
+            break;
         }
-        //cout << "Завершить работу? (y/n)";
-        //cin >> cont;
-        //system("cls");
-    } while (cont != "n" && !MANUAL);
+        cout << "Завершить работу? (y/n)";
+        cin >> cont;
+        system("cls");
+    } while (cont != 'y' && !MANUAL);
 
-    system("pause");
+    //system("pause");
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

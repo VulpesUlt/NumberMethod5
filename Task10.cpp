@@ -18,11 +18,10 @@ namespace T10
 		
 		while (arrPtr[X][counter] < Pt)
 			counter++;
-		counter++;
 
 		left = (arrPtr[Y][counter] - arrPtr[Y][counter - 1]) / (arrPtr[X][counter] - arrPtr[X][counter - 1]);
 		right = (arrPtr[Y][counter + 1] - arrPtr[Y][counter]) / (arrPtr[X][counter + 1] - arrPtr[X][counter]);
-		mid = (left + right) / 2;
+		mid = (arrPtr[Y][counter + 1] - arrPtr[Y][counter - 1]) / (arrPtr[X][counter + 1] - arrPtr[X][counter - 1]);
 
 		cout << endl << "Первая производная заданной функции в точке " << Pt << ": " << endl;
 		cout << "Левая: " << left << " | Правая: " << right << " | Центральная: " << mid << endl;
@@ -36,9 +35,8 @@ namespace T10
 
 		while (arrPtr[X][counter] < Pt)
 			counter++;
-		counter++;
 	
-		diff = arrPtr[X][counter + 1] - arrPtr[X][counter];
+		diff = (arrPtr[X][counter + 1] - arrPtr[X][counter - 1]) / 2;
 		diff = (arrPtr[Y][counter + 1] - 2 * arrPtr[Y][counter] + arrPtr[Y][counter - 1]) / pow(diff, 2);
 
 		cout << endl << "Вторая производная заданной функции в точке " << Pt << ": " << diff << endl;
@@ -62,7 +60,9 @@ namespace T10
 			cin >> arrPtr[Y][i];
 		}
 
-		int Pt{ 0 };
+		printArray(arrPtr, 2, nPt);
+
+		double Pt{ 0 };
 		cout << "Введите точку, в которой необхожимо найти значение производной: ";
 		cin >> Pt;
 
