@@ -1,6 +1,6 @@
 #pragma once
 
-// Tasl 1-4=====================================================
+// Tasks 1-4=====================================================
 
 const double PI = 3.141592653589793;
 
@@ -10,7 +10,7 @@ void printArray(double** arrayPtr, int numberOflines, int numberOfColumns);
 void __fastcall gaussMethod(double** arrayPtr, int numberOflines, int numberOfColumns);
 
 void __fastcall threeDiagMethod(double* arrayPtr[], int numberOflines, int numberOfColumns);
-void __fastcall threeDiagMethod(double* arrayPtr[], double* ansPtr, const int numberOflines, const int numberOfColumns);
+void __fastcall threeDiagMethod(double* arrayPtr[], double* ansPtr, const int numberOflines, const int numberOfColumns); // Для кубического сплайна
 bool __fastcall threeDiagCheck(double* arrayPtr[], int numberOflines);
 
 void __fastcall SeidelMethod(double** arrPtr, int numberOfLines, int numberOfCulumns);
@@ -21,7 +21,7 @@ void __fastcall TurnMethod(double** arrPtr, int numberOfLines, int numberOfColum
 void __fastcall multArr(double** arrMain, double** arrSec, int rang, bool pos);
 void __fastcall transposeArr(double** arrPtr, int rang);
 
-void init14();
+void init14(int);
 
 // Task 5 ======================================================
 

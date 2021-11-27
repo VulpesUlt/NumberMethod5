@@ -512,7 +512,7 @@ void __fastcall transposeArr(double** arrPtr, int rang)
 				swap(arrPtr[i][j], arrPtr[j][i]);
 }
 
-void init14()
+void init14(int nTask)
 {
 	int n = 0;
 	std::cout << "Введите количество уравнений: ";
@@ -527,10 +527,22 @@ void init14()
 	printArray(arrayPtr, n, n);
 	std::cout << std::endl;
 
-	//gaussMethod(arrayPtr, n, n + 1);
-	//JacobiMethod(arrayPtr, n, n + 1);
-	//SeidelMethod(arrayPtr, n, n + 1);
-	TurnMethod(arrayPtr, n, n);
+	switch (nTask)
+	{
+	case 1:
+		gaussMethod(arrayPtr, n, n + 1);
+		break;
+	case 2:
+		threeDiagMethod(arrayPtr, n, n + 1);
+		break;
+	case 3:
+		JacobiMethod(arrayPtr, n, n + 1);
+		SeidelMethod(arrayPtr, n, n + 1);
+		break;
+	case 4:
+		TurnMethod(arrayPtr, n, n);
+		break;
+	}
 	printArray(arrayPtr, n, n);
 	std::cout << std::endl;
 

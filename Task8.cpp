@@ -11,8 +11,6 @@ const int B = 4;
 const int C = 5;
 const int D = 6;
 
-#define puk cout << "Пук пук пук";
-
 using namespace std;
 
 namespace T8
@@ -60,7 +58,7 @@ namespace T8
 		
 		// Нахождение коэффициентов С
 		double* tempPtr = new double[nPt - 2];
-		threeDiagMethod(arrCPtr, tempPtr, nPt - 2, nPt - 1);
+		threeDiagMethod(arrCPtr, tempPtr, nPt - 2, nPt - 1); // Реализация в Task1-4.cpp
 		for (int i = 0; i < nPt - 2; i++)
 			arrPtr[C][i + 2] = tempPtr[i];
 		arrPtr[C][1] = 0; // т.к. C1 = 0
@@ -108,6 +106,37 @@ namespace T8
 		val += arrPtr[D][counter] * powf((newPoint - arrPtr[X][counter - 1]), 3);
 		
 		cout << "Значание функции в точке [" << newPoint << "]: " << val << endl;
+		
+		cout << arrPtr[A][counter];
+		if (arrPtr[B][counter] > 0)
+			cout << " + " << arrPtr[B][counter];
+		else
+			cout << " - " << abs(arrPtr[B][counter]);
+
+		if (arrPtr[X][counter] > 0)
+			cout << "*(X - " << arrPtr[X][counter] << ")";
+		else
+			cout << "*(X + " << abs(arrPtr[X][counter]) << ")";
+
+		if (arrPtr[C][counter] > 0)
+			cout << " + " << arrPtr[C][counter];
+		else
+			cout << " - " << abs(arrPtr[C][counter]);
+
+		if (arrPtr[X][counter] > 0)
+			cout << "*(X - " << arrPtr[X][counter] << ")";
+		else
+			cout << "*(X + " << abs(arrPtr[X][counter]) << ")^2";
+		
+		if (arrPtr[D][counter] > 0)
+			cout << " + " << arrPtr[D][counter];
+		else
+			cout << " - " << abs(arrPtr[D][counter]);
+
+		if (arrPtr[X][counter] > 0)
+			cout << "*(X - " << arrPtr[X][counter] << ")^3" << endl;
+		else
+			cout << "*(X + " << abs(arrPtr[X][counter]) << ")^2" << endl;
 
 		for (int i = 0; i < nPt - 2; i++)
 			delete[] arrCPtr[i];
@@ -118,25 +147,27 @@ namespace T8
 	{
 		int nPt{ 0 };
 		cout << "Введите количество точек: ";
-		cin >> nPt;
+		do
+		{
+			cin >> nPt;
+			if (nPt < 3)
+				cout << "Требуется мнимум 3 точки" << endl;
+		} while (nPt < 3);
 
 		double** arrPtr = new double* [7];
 		for (int i = 0; i < 7; i++)
 			arrPtr[i] = new double[nPt];
 		
-		cout << "Введите точки и значения функции в них (х): (у):";
+		cout << "Введите точки и значения функции в них (х): (у):" << endl;
 
 		for (int i = 0; i < nPt; i++)
 		{
-			//cout << "x(" << i << ") y(" << i << ")" << endl;
+			cout << "x(" << i << ") y(" << i << "): " << endl;
 			cin >> arrPtr[X][i];
 			cin >> arrPtr[Y][i];
-			//arrPtr[Y][i] = arrPtr[X][i] * log(arrPtr[X][i]);
 		}
 		
 		cbSpline(arrPtr, nPt);
-		
-		puk
 
 		for (int i = 0; i < 7; i++)
 			delete[] arrPtr[i];

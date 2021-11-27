@@ -264,7 +264,7 @@ namespace T7
 			delete[] point;
 		}
 		else
-			cout << var << " не реализован" << endl;
+			cout << "Вариант №" << var << " не был реализован." << endl;
 	}
 
 }

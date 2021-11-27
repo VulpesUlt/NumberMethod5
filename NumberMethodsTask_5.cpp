@@ -24,7 +24,7 @@ int main()
         cin >> nTask;
         switch (nTask)
         {
-        case 1: init14();
+        case 1: init14(nTask);
             break;
         case 5: T5::initT5();
             break;

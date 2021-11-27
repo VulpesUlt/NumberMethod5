@@ -139,18 +139,25 @@ namespace T5
 
         cout << "¬ведите номер варианта: ";
         cin >> var;
-        cout << "¬ведите левую границу: ";
-        cin >> b1;
-        cout << "¬ведите правую границу: ";
-        cin >> b2;
-        cout << "¬ведите требуемую точность: ";
-        cin >> acc;
+        
+        if (var == 5 || var == 9 || var == 18)
+        {
+            cout << "¬ведите левую границу: ";
+            cin >> b1;
+            cout << "¬ведите правую границу: ";
+            cin >> b2;
+            cout << "¬ведите требуемую точность: ";
+            cin >> acc;
 
-        cout << "===== ћетод Ќьютона =====" << endl;
-        cout << "x= " << setprecision(6) << T5::NwtMethod(var, b1, b2, acc) << endl;
+            cout << "===== ћетод Ќьютона =====" << endl;
+            cout << "x= " << setprecision(6) << T5::NwtMethod(var, b1, b2, acc) << endl;
 
-        cout << "===== ћетод простой итерации =====" << endl;
-        cout << "x= " << setprecision(6) << T5::smplIter(var, b1, b2) << endl;
+            cout << "===== ћетод простой итерации =====" << endl;
+            cout << "x= " << setprecision(6) << T5::smplIter(var, b1, b2) << endl;
+        }
+        else
+            cout << "¬ариант є" << var << " не был реализован." << endl;
+        
     }
 
 }

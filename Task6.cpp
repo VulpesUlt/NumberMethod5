@@ -294,19 +294,24 @@ namespace T6
 		int var{ 0 };
 		cout << "Введите номер варианта: ";
 		cin >> var;
-		cout << "Введите начальный х1: ";
-		cin >> x1;
-		cout << "Введите начальный х2: ";
-		cin >> x2;
-		cout << "Введите требуемую точность: ";
-		cin >> precision;
 
-		cout << endl << "===== Метод Ньютона =====" << endl;
-		T6::NewtMethod (x1, x2, precision, var);
+		if (var == 5 || var == 9 || var == 18)
+		{
+			cout << "Введите начальный х1: ";
+			cin >> x1;
+			cout << "Введите начальный х2: ";
+			cin >> x2;
+			cout << "Введите требуемую точность: ";
+			cin >> precision;
 
-		cout << endl << "===== Метод Простой Итерации =====" << endl;
-		T6::iterMethod(x1, x2, precision, var);
+			cout << endl << "===== Метод Ньютона =====" << endl;
+			T6::NewtMethod(x1, x2, precision, var);
 
+			cout << endl << "===== Метод Простой Итерации =====" << endl;
+			T6::iterMethod(x1, x2, precision, var);
+		}
+		else
+			cout << "Вариант №" << var << " не был реализован." << endl;
 	}
 
 } 
